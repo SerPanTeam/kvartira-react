@@ -57,17 +57,17 @@ function App() {
     <div>
       <Layout>
         <FilterDropdown
+          label="Продаж/Аренда"
+          currentObjects={currentObjects}
+          defaultValue="Усі типи"
+          type="type"
+          subType=""
+        />
+        <FilterDropdown
           label="Категорії нерухомості"
           currentObjects={currentObjects}
           defaultValue="Усі Категорії"
           type="category"
-          subType=""
-        />
-        <FilterDropdown
-          label="Тип нерухомості"
-          currentObjects={currentObjects}
-          defaultValue="Усі типи"
-          type="type"
           subType=""
         />
         <FilterDropdown
@@ -77,19 +77,19 @@ function App() {
           type="location"
           subType="sub-locality-name"
         />
+          <FilterDropdown
+            label="Комнат"
+            currentObjects={currentObjects}
+            defaultValue="Усі Комнат"
+            type="rooms"
+            subType=""
+          />
         <FilterDropdown
           label="Агенти"
           currentObjects={currentObjects}
           defaultValue="Усі Агенти"
           type="sales-agent"
           subType="name"
-        />
-        <FilterDropdown
-          label="Комнат"
-          currentObjects={currentObjects}
-          defaultValue="Усі Комнат"
-          type="rooms"
-          subType=""
         />
         {paginationComonent}
         <PropertiesList data={currentObjects}></PropertiesList>
