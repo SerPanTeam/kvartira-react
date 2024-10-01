@@ -11,7 +11,7 @@ import FilterDropdown from "./components/FilterDropdown";
 function App() {
   const [realEstateData, setRealEstateData] = useState<RealEstateObject[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const objectsPerPage = 100;
+  const objectsPerPage = 99;
   //const [count, setCount] = useState(0);
 
   useEffect(() => {
@@ -77,13 +77,13 @@ function App() {
           type="location"
           subType="sub-locality-name"
         />
-          <FilterDropdown
-            label="Комнат"
-            currentObjects={currentObjects}
-            defaultValue="Усі Комнат"
-            type="rooms"
-            subType=""
-          />
+        <FilterDropdown
+          label="Комнат"
+          currentObjects={currentObjects}
+          defaultValue="Усі Комнат"
+          type="rooms"
+          subType=""
+        />
         <FilterDropdown
           label="Агенти"
           currentObjects={currentObjects}

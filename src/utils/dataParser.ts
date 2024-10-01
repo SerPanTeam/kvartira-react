@@ -9,7 +9,7 @@ interface NodeProcessor {
 export async function loadRealEstateData() {
   try {
     const realEstateArray: RealEstateObject[] = [];
-    const response = await fetch("/api/yandex.xml");
+    const response = await fetch("/api/yandex_ua.xml");
     const xmlText = await response.text();
     const parser = new DOMParser();
     const xmlDoc = parser.parseFromString(xmlText, "application/xml");
@@ -19,7 +19,9 @@ export async function loadRealEstateData() {
     // Заполняем массив объектами недвижимости
     offers.forEach((offer) => {
       let realEstateObject: RealEstateObject = {
-        id: offer.getAttribute("internal-id") ? parseInt(offer.getAttribute("internal-id")!, 10) : 0,
+        id: offer.getAttribute("internal-id")
+          ? parseInt(offer.getAttribute("internal-id")!, 10)
+          : 0,
         images: [],
       };
       // Получаем значение атрибута internal-id
