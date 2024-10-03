@@ -28,6 +28,8 @@ const PropertyCard = ({
   imageUrl,
   obj,
 }: PropertyCardProps) => {
+  const phoneNumber = obj["sales-agent"].phone.replace(/[^\d]/g, "");
+
   return (
     <Card
       sx={{
@@ -62,7 +64,7 @@ const PropertyCard = ({
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            boxSizing: "border-box", // Добавлено для учета padding
+            boxSizing: "border-box",
           }}
         >
           <Typography
@@ -75,7 +77,7 @@ const PropertyCard = ({
               whiteSpace: "nowrap",
               textOverflow: "ellipsis",
               fontSize: { xs: "1rem", sm: "1.25rem" },
-              maxWidth: "50%", // Ограничение ширины
+              maxWidth: "50%",
             }}
           >
             №: {obj.id}
@@ -90,7 +92,7 @@ const PropertyCard = ({
               whiteSpace: "nowrap",
               textOverflow: "ellipsis",
               fontSize: { xs: "1rem", sm: "1.25rem" },
-              maxWidth: "50%", // Ограничение ширины
+              maxWidth: "50%",
             }}
           >
             {formatPrice(obj.price)}
@@ -126,26 +128,20 @@ const PropertyCard = ({
         {[
           {
             color: "secondary",
-            href: `viber://chat?number=${obj["sales-agent"].phone}`,
+            href: `viber://chat?number=%2B${phoneNumber}`,
             icon: ViberIcon,
             label: "Viber",
           },
           {
             color: "success",
-            href: `https://wa.me/${obj["sales-agent"].phone.replace(
-              /[^\d]/g,
-              ""
-            )}`,
+            href: `https://wa.me/${phoneNumber}`,
             icon: WhatsAppIcon,
             label: "WhatsApp",
             target: "_blank",
           },
           {
             color: "info",
-            href: `https://t.me/+${obj["sales-agent"].phone.replace(
-              /[^\d]/g,
-              ""
-            )}`,
+            href: `https://t.me/+${phoneNumber}`,
             icon: TelegramIcon,
             label: "Telegram",
             target: "_blank",
