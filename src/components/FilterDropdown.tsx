@@ -38,19 +38,20 @@ const FilterDropdown: React.FC<FilterDropdownProps> = ({
     listFromArray = Array.from(
       new Set(currentObjects.map((item) => item[type][subType]))
     );
-    listFromArray.sort();
+  listFromArray.sort();
 
   return (
     <Box sx={{ display: "flex", alignItems: "center", gap: 2, mb: 2 }}>
       <FormControl fullWidth>
         <InputLabel>{label}</InputLabel>
         <Select
-          value={selectedOption}
+          key={label}
+          value={listFromArray.includes(selectedOption) ? selectedOption : ""}
           label={label}
           onChange={(e) => setSelectedOption(e.target.value)}
         >
-          {listFromArray.map((option) => (
-            <MenuItem key={option} value={option}>
+          {listFromArray.map((option, index) => (
+            <MenuItem key={index} value={option}>
               {option}
             </MenuItem>
           ))}

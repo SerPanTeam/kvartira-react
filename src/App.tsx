@@ -58,35 +58,35 @@ function App() {
       <Layout>
         <FilterDropdown
           label="Продаж/Аренда"
-          currentObjects={currentObjects}
+          currentObjects={realEstateData}
           defaultValue="Усі типи"
           type="type"
           subType=""
         />
         <FilterDropdown
           label="Категорії нерухомості"
-          currentObjects={currentObjects}
+          currentObjects={realEstateData}
           defaultValue="Усі Категорії"
           type="category"
           subType=""
         />
         <FilterDropdown
           label="Райони"
-          currentObjects={currentObjects}
+          currentObjects={realEstateData}
           defaultValue="Усі Райони"
           type="location"
           subType="sub-locality-name"
         />
         <FilterDropdown
           label="Комнат"
-          currentObjects={currentObjects}
+          currentObjects={realEstateData}
           defaultValue="Усі Комнат"
           type="rooms"
           subType=""
         />
         <FilterDropdown
           label="Агенти"
-          currentObjects={currentObjects}
+          currentObjects={realEstateData}
           defaultValue="Усі Агенти"
           type="sales-agent"
           subType="name"

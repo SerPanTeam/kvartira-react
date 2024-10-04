@@ -1,11 +1,4 @@
-import {
-  Card,
-  Typography,
-  CardMedia,
-  Box,
-  Button,
-  Grid,
-} from "@mui/material";
+import { Card, Typography, CardMedia, Box, Button, Grid } from "@mui/material";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import PhoneIcon from "@mui/icons-material/Phone";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
@@ -23,7 +16,7 @@ interface PropertyCardProps {
 }
 
 const PropertyCard = ({
-  title,
+  // title,
   description,
   imageUrl,
   obj,
@@ -33,18 +26,34 @@ const PropertyCard = ({
   return (
     <Card
       sx={{
-        maxWidth: { xs: "100%", sm: 450 },
+        maxWidth: { xs: "100%", sm: 470 },
         position: "relative",
         mx: "auto",
         mb: 2,
       }}
     >
+      <Typography
+        variant="h6"
+        sx={{ "&::first-letter": { textTransform: "uppercase" } }}
+      >
+        {obj.category}
+        {obj.rooms ? ", " + obj.rooms + " к." : ""}
+
+        {obj.floor
+          ? ", " + obj.floor + "/" + obj["floors-total"] + " эт."
+          : obj["floors-total"]
+          ? ", " + obj["floors-total"] + " эт."
+          : ""}
+
+        {obj.area ? ", " + obj.area.value + " м²" : ""}
+        {obj["lot-area"] ? ", " + obj["lot-area"].value + " сот." : ""}
+      </Typography>
       {/* Контейнер для изображения */}
       <Box sx={{ position: "relative" }}>
         <CardMedia
           component="img"
           sx={{
-            height: { xs: 200, sm: 300, md: 400 },
+            height: { xs: 300, sm: 300, md: 400 },
             objectFit: "cover",
           }}
           image={imageUrl}
@@ -105,6 +114,7 @@ const PropertyCard = ({
         <LocationOnIcon sx={{ color: "primary.main", mr: 1 }} />
         <Typography variant="body2">
           {obj.location["sub-locality-name"]}, {obj.location.address}
+          {obj.location.zk ? ", ЖК " + obj.location.zk : ""}
         </Typography>
       </Box>
 
@@ -150,7 +160,8 @@ const PropertyCard = ({
           <Grid item xs={4} key={index}>
             <Button
               variant="contained"
-              color={messenger.color}
+              color={messenger.color as "primary" | "secondary" | "success" | "info"}
+              //{messenger.color}
               component="a"
               href={messenger.href}
               target={messenger.target}
