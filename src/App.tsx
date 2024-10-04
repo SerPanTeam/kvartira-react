@@ -3,9 +3,9 @@ import "./App.css";
 import Layout from "./components/Layout/Layout";
 import RealEstateObject from "./interfaces/RealEstateObject";
 import PropertiesList from "./components/PropertiesList/PropertiesList";
-import { loadRealEstateData } from "./utils/dataParser"; // Импорт вашей функции для загрузки данных
-import { Pagination } from "@mui/material";
+import { loadRealEstateData } from "./utils/dataParser";
 import FilterDropdown from "./components/FilterDropdown";
+import PaginationComponent from "./components/PaginationComponent";
 //const filters = ["Все", "Квартиры", "Дома", "Офисы"];
 
 function App() {
@@ -37,21 +37,6 @@ function App() {
   ) => {
     setCurrentPage(value);
   };
-
-  const paginationComonent = (
-    <Pagination
-      count={Math.ceil(realEstateData.length / objectsPerPage)} // Количество страниц
-      page={currentPage}
-      onChange={handlePageChange}
-      color="primary" // Цвет пагинации
-      size="large" // Размер пагинации
-      shape="rounded"
-      variant="outlined"
-      siblingCount={2}
-      boundaryCount={2}
-      sx={{ marginBottom: 2 }}
-    />
-  );
 
   return (
     <div>
@@ -91,9 +76,9 @@ function App() {
           type="sales-agent"
           subType="name"
         />
-        {paginationComonent}
+        <PaginationComponent handlePageChange={handlePageChange} currentPage={currentPage} objectsPerPage={objectsPerPage} realEstateDataLength={realEstateData.length} />
         <PropertiesList data={currentObjects}></PropertiesList>
-        {paginationComonent}
+        <PaginationComponent handlePageChange={handlePageChange} currentPage={currentPage} objectsPerPage={objectsPerPage} realEstateDataLength={realEstateData.length} />
       </Layout>
     </div>
   );
