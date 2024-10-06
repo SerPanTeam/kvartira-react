@@ -1,19 +1,13 @@
-import { useEffect, useState } from "react";
-import "./App.css";
-import Layout from "./components/Layout/Layout";
+import { useEffect, useState, useRef } from "react";
+import Layout from "./components/Layout";
 import RealEstateObject from "./interfaces/RealEstateObject";
-import PropertiesList from "./components/PropertiesList/PropertiesList";
+import PropertiesList from "./components/PropertiesList";
 import { loadRealEstateData } from "./utils/dataParser";
-import FilterDropdown from "./components/FilterDropdown";
 import PaginationComponent from "./components/PaginationComponent";
-//const filters = ["Все", "Квартиры", "Дома", "Офисы"];
+import FiltersDropdown from "./components/FiltersDropdown";
 
 function App() {
   const [realEstateData, setRealEstateData] = useState<RealEstateObject[]>([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const objectsPerPage = 99;
-  //const [count, setCount] = useState(0);
-
   useEffect(() => {
     const fetchData = async () => {
       const data: RealEstateObject[] = await loadRealEstateData(); // Загружаем данные
@@ -23,6 +17,9 @@ function App() {
     fetchData(); // Вызываем загрузку данных при монтировании компонента
   }, []);
 
+  const topPaginationRef = useRef<HTMLDivElement>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const objectsPerPage = 99;
   // Определяем объекты для текущей страницы
   const indexOfLastObject = currentPage * objectsPerPage;
   const indexOfFirstObject = indexOfLastObject - objectsPerPage;
@@ -36,49 +33,30 @@ function App() {
     value: number
   ) => {
     setCurrentPage(value);
+    topPaginationRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
+
+  const paginationComponent = (
+    <PaginationComponent
+      handlePageChange={handlePageChange}
+      currentPage={currentPage}
+      objectsPerPage={objectsPerPage}
+      realEstateDataLength={realEstateData.length}
+    />
+  );
+
+  const [filtesArray, setfiltesArray] = useState({});
+
 
   return (
     <div>
       <Layout>
-        <FilterDropdown
-          label="Продаж/Аренда"
-          currentObjects={realEstateData}
-          defaultValue="Усі типи"
-          type="type"
-          subType=""
-        />
-        <FilterDropdown
-          label="Категорії нерухомості"
-          currentObjects={realEstateData}
-          defaultValue="Усі Категорії"
-          type="category"
-          subType=""
-        />
-        <FilterDropdown
-          label="Райони"
-          currentObjects={realEstateData}
-          defaultValue="Усі Райони"
-          type="location"
-          subType="sub-locality-name"
-        />
-        <FilterDropdown
-          label="Комнат"
-          currentObjects={realEstateData}
-          defaultValue="Усі Комнат"
-          type="rooms"
-          subType=""
-        />
-        <FilterDropdown
-          label="Агенти"
-          currentObjects={realEstateData}
-          defaultValue="Усі Агенти"
-          type="sales-agent"
-          subType="name"
-        />
-        <PaginationComponent handlePageChange={handlePageChange} currentPage={currentPage} objectsPerPage={objectsPerPage} realEstateDataLength={realEstateData.length} />
+        <FiltersDropdown realEstateData={realEstateData} setfiltesArray={setfiltesArray}/>
+        <div ref={topPaginationRef}>{paginationComponent}</div>
+
         <PropertiesList data={currentObjects}></PropertiesList>
-        <PaginationComponent handlePageChange={handlePageChange} currentPage={currentPage} objectsPerPage={objectsPerPage} realEstateDataLength={realEstateData.length} />
+
+        {paginationComponent}
       </Layout>
     </div>
   );

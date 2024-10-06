@@ -7,6 +7,7 @@ import {
   Button,
   Box,
 } from "@mui/material";
+import ClearIcon from "@mui/icons-material/Clear"; // Импортируем иконку для кнопки сброса
 import RealEstateObject from "../interfaces/RealEstateObject";
 
 interface FilterDropdownProps {
@@ -58,7 +59,7 @@ const FilterDropdown: React.FC<FilterDropdownProps> = ({
         </Select>
       </FormControl>
       <Button variant="contained" color="primary" onClick={handleReset}>
-        Сбросить
+        <ClearIcon />
       </Button>
     </Box>
   );
