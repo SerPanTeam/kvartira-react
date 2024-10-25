@@ -45,13 +45,13 @@ function App() {
     />
   );
 
-  const [filtesArray, setfiltesArray] = useState({});
+  //const [filtesArray, setfiltesArray] = useState({});
 
 
   return (
     <div>
       <Layout>
-        <FiltersDropdown realEstateData={realEstateData} setfiltesArray={setfiltesArray}/>
+        <FiltersDropdown realEstateData={realEstateData} /* setfiltesArray={setfiltesArray} *//>
         <div ref={topPaginationRef}>{paginationComponent}</div>
 
         <PropertiesList data={currentObjects}></PropertiesList>

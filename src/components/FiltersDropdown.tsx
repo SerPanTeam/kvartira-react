@@ -27,6 +27,18 @@ const filters = [
     subType: "",
   },
   {
+    label: "ЖК",
+    defaultValue: "Усі ЖК",
+    type: "location",
+    subType: "zk",
+  },
+  {
+    label: "Вулиця",
+    defaultValue: "Усі вулиці",
+    type: "location",
+    subType: "street",
+  },
+  {
     label: "Агенти",
     defaultValue: "Усі Агенти",
     type: "sales-agent",
